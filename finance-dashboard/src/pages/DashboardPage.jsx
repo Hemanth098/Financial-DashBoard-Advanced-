@@ -19,7 +19,7 @@ export default function DashboardPage() {
   const income = myTxns.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
   const expenses = myTxns.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
   const savings = income - expenses;
-  const balance = 24830 + (currentUser.id - 1) * 3200;
+  const balance = income - expenses;
 
   const recent = [...myTxns].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 5);
 
