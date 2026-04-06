@@ -1,83 +1,102 @@
-import { useEffect } from 'react'
-import { motion } from 'framer-motion'
-import { Briefcase, Mail, ShieldCheck, UserCircle2 } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
-import useAuthStore from '../store/useAuthStore'
+import React from 'react';
+import { useApp } from '../context/AppContext';
+import { fmt, fmtDate, CAT_COLORS, cardStyle, getAvatarColor } from '../utils';
 
 export default function ProfilePage() {
-  const { user } = useAuthStore()
-  const navigate = useNavigate()
+  const { state } = useApp();
+  const { currentUser, db } = state;
+  const isAdmin = currentUser.role === 'admin';
+  const ac = getAvatarColor(currentUser.id);
 
-  useEffect(() => {
-    if (!user) {
-      navigate('/login')
-    }
-  }, [user, navigate])
-
-  if (!user) {
-    return null
-  }
+  const myTxns = db.transactions.filter(t => t.userId === currentUser.id);
+  const income = myTxns.filter(t => t.type === 'income').reduce((s, t) => s + t.amount, 0);
+  const expenses = myTxns.filter(t => t.type === 'expense').reduce((s, t) => s + t.amount, 0);
 
   return (
-    <div className="container-fluid p-4">
-      <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="mb-8 rounded-3xl bg-gradient-to-r from-cyan-600 to-indigo-700 p-8 shadow-2xl text-white overflow-hidden relative">
-        <div className="absolute -left-10 top-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
-        <div className="relative z-10">
-          <p className="text-sm uppercase tracking-[0.35em] text-cyan-100/80">Profile</p>
-          <h1 className="mt-3 text-4xl font-bold text-white">Your account details</h1>
-          <p className="mt-4 max-w-2xl text-slate-200/90">This profile page shows your role-based access and the data connected to your JSON-backed user account.</p>
+    <div style={{ padding: '28px', display: 'flex', flexDirection: 'column', gap: '20px' }} className="animate-fadeup">
+      {/* Profile header card */}
+      <div style={{ ...cardStyle, padding: '28px 32px', display: 'flex', alignItems: 'center', gap: '24px' }}>
+        <div style={{ width: '72px', height: '72px', borderRadius: '50%', background: ac.bg, color: ac.color, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '24px', fontWeight: '600', flexShrink: 0, border: `2px solid ${ac.color}40` }}>
+          {currentUser.avatar}
         </div>
-      </motion.div>
-
-      <div className="grid gap-6 md:grid-cols-[2fr_1fr]">
-        <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.55 }} className="rounded-3xl bg-white dark:bg-slate-900 p-8 shadow-lg border border-slate-200/70 dark:border-slate-800/70">
-          <div className="flex items-center gap-6">
-            <div className="h-24 w-24 rounded-3xl bg-slate-100 dark:bg-slate-800 overflow-hidden shadow-lg">
-              <img src={user.avatar} alt={user.name} className="h-full w-full object-cover" />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">{user.name}</h2>
-              <p className="text-slate-500 dark:text-slate-400 mt-1">{user.role}</p>
-            </div>
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: '22px', fontWeight: '600', letterSpacing: '-0.5px', marginBottom: '4px' }}>{currentUser.name}</div>
+          <div style={{ fontSize: '14px', color: 'var(--text2)', marginBottom: '10px' }}>{currentUser.email}</div>
+          <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <span style={{ fontSize: '12px', fontWeight: '600', padding: '4px 12px', borderRadius: '20px', background: isAdmin ? 'rgba(249,168,50,0.15)' : 'rgba(79,142,247,0.12)', color: isAdmin ? 'var(--amber)' : 'var(--accent)' }}>
+              {isAdmin ? '🔑 Admin' : '👁 Viewer'}
+            </span>
+            <span style={{ fontSize: '12px', padding: '4px 12px', borderRadius: '20px', background: 'var(--bg3)', color: 'var(--text3)', border: '1px solid var(--border2)' }}>
+              Joined {fmtDate(currentUser.joinedAt)}
+            </span>
           </div>
-
-          <div className="mt-8 grid gap-4">
-            <div className="rounded-3xl bg-slate-50 dark:bg-slate-950 p-6">
-              <div className="flex items-center gap-3 text-slate-500 mb-3">
-                <Mail size={18} />
-                <span className="font-semibold">Email</span>
-              </div>
-              <p className="text-slate-700 dark:text-slate-200">{user.email}</p>
+        </div>
+        <div style={{ display: 'flex', gap: '20px' }}>
+          {[
+            { label: 'Total Income', value: fmt(income), color: 'var(--green)' },
+            { label: 'Total Expenses', value: fmt(expenses), color: 'var(--red)' },
+            { label: 'Transactions', value: myTxns.length, color: 'var(--text)' },
+          ].map(stat => (
+            <div key={stat.label} style={{ textAlign: 'center' }}>
+              <div style={{ fontSize: '20px', fontWeight: '600', letterSpacing: '-0.5px', fontFamily: 'var(--mono)', color: stat.color }}>{stat.value}</div>
+              <div style={{ fontSize: '11px', color: 'var(--text3)', marginTop: '3px' }}>{stat.label}</div>
             </div>
-            <div className="rounded-3xl bg-slate-50 dark:bg-slate-950 p-6">
-              <div className="flex items-center gap-3 text-slate-500 mb-3">
-                <ShieldCheck size={18} />
-                <span className="font-semibold">Access Level</span>
-              </div>
-              <p className="text-slate-700 dark:text-slate-200">{user.role === 'admin' ? 'Full access' : user.role === 'manager' ? 'Manager access' : 'Viewer access'}</p>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.55 }} className="rounded-3xl bg-white dark:bg-slate-900 p-8 shadow-lg border border-slate-200/70 dark:border-slate-800/70">
-          <div className="flex items-center gap-3 text-cyan-500 mb-6">
-            <Briefcase size={20} />
-            <h2 className="text-2xl font-bold">Account summary</h2>
-          </div>
-          <p className="text-slate-500 dark:text-slate-300 leading-7">You are logged in with user-specific data sourced from users.json. This ensures the dashboard only shows data assigned to your account.</p>
-
-          <div className="mt-8 space-y-4 rounded-3xl border border-slate-200/70 dark:border-slate-800/70 bg-slate-50 dark:bg-slate-950 p-5">
-            <div className="flex items-center gap-3 text-slate-500">
-              <UserCircle2 size={18} />
-              <span>Role-based dashboard access</span>
-            </div>
-            <div className="flex items-center gap-3 text-slate-500">
-              <ShieldCheck size={18} />
-              <span>Protected routes and secure login</span>
-            </div>
-          </div>
-        </motion.div>
+          ))}
+        </div>
       </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        {/* Personal details */}
+        <div style={{ ...cardStyle, padding: '24px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '600', color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '18px' }}>Personal Details</div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+            {[
+              { label: 'Full Name', value: currentUser.name },
+              { label: 'Email', value: currentUser.email },
+              { label: 'Phone', value: currentUser.phone || '—' },
+              { label: 'Location', value: currentUser.location || '—' },
+              { label: 'Role', value: currentUser.role },
+              { label: 'Member Since', value: fmtDate(currentUser.joinedAt) },
+            ].map((row, i) => (
+              <div key={i} style={{ display: 'flex', padding: '12px 0', borderBottom: i < 5 ? '1px solid var(--border)' : 'none' }}>
+                <div style={{ fontSize: '13px', color: 'var(--text3)', width: '120px', flexShrink: 0 }}>{row.label}</div>
+                <div style={{ fontSize: '14px', fontWeight: '500' }}>{row.value}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* My recent transactions */}
+        <div style={{ ...cardStyle, padding: '24px' }}>
+          <div style={{ fontSize: '11px', fontWeight: '600', color: 'var(--text3)', textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: '16px' }}>My Recent Transactions</div>
+          {myTxns.length === 0 ? (
+            <div style={{ fontSize: '14px', color: 'var(--text3)', textAlign: 'center', padding: '32px 0' }}>No transactions yet.</div>
+          ) : (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
+              {[...myTxns].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 6).map((tx, i, arr) => (
+                <div key={tx.id} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '10px 0', borderBottom: i < arr.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                  <div style={{ width: '34px', height: '34px', borderRadius: '10px', background: tx.type === 'income' ? 'rgba(52,212,138,0.12)' : 'rgba(242,90,90,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '15px', flexShrink: 0 }}>{tx.emoji}</div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: '13px', fontWeight: '500', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{tx.name}</div>
+                    <div style={{ fontSize: '11px', color: 'var(--text3)' }}>{fmtDate(tx.date)}</div>
+                  </div>
+                  <div style={{ fontFamily: 'var(--mono)', fontSize: '13px', fontWeight: '500', color: tx.type === 'income' ? 'var(--green)' : 'var(--red)', flexShrink: 0 }}>
+                    {tx.type === 'income' ? '+' : '-'}{fmt(tx.amount)}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Admin note */}
+      {isAdmin && (
+        <div style={{ background: 'rgba(249,168,50,0.08)', border: '1px solid rgba(249,168,50,0.2)', borderRadius: '12px', padding: '14px 18px', fontSize: '13px', color: 'var(--amber)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '16px' }}>🔑</span>
+          You have Admin access — you can manage all users and transactions across the platform.
+        </div>
+      )}
     </div>
-  )
+  );
 }
