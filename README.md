@@ -72,7 +72,10 @@ Or register a new account on the login page.
 ![Dashboard](screenshots/dashboard.png)
 
 ### Transactions Page
-![Transactions](screenshots/transactions.png)
+#### Admin
+![Transactions](screenshots/transactions_admin.png)
+#### Viewer
+![Transactions](screenshots/transactions_viewer.png)
 
 ### Insights Page
 ![Insights](screenshots/insights.png)
