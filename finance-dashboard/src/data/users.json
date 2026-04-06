@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Hemanth",
+    "email": "admin@finance.com",
+    "password": "123456",
+    "role": "admin",
+    "avatar": "https://i.pravatar.cc/150?img=12"
+  },
+  {
+    "id": 2,
+    "name": "Rahul",
+    "email": "viewer@finance.com",
+    "password": "123456",
+    "role": "viewer",
+    "avatar": "https://i.pravatar.cc/150?img=15"
+  },
+  {
+    "id": 3,
+    "name": "Priya",
+    "email": "manager@finance.com",
+    "password": "123456",
+    "role": "manager",
+    "avatar": "https://i.pravatar.cc/150?img=25"
+  }
+]

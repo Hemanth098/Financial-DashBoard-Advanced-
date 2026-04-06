@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "date": "2026-04-01",
+    "description": "Salary Credit",
+    "category": "Salary",
+    "type": "income",
+    "amount": 75000
+  },
+  {
+    "id": 2,
+    "userId": 1,
+    "date": "2026-04-02",
+    "description": "Rent Payment",
+    "category": "Rent",
+    "type": "expense",
+    "amount": 18000
+  },
+  {
+    "id": 3,
+    "userId": 2,
+    "date": "2026-04-03",
+    "description": "Freelance Work",
+    "category": "Freelance",
+    "type": "income",
+    "amount": 15000
+  },
+   {
+    "id": 4,
+    "userId": 3,
+    "date": "2026-04-04",
+    "description": "Shopping",
+    "category": "Shopping",
+    "type": "expense",
+    "amount": 4200
+  }
+]

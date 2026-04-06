@@ -1,0 +1,757 @@
+/* FinFlow Design System */
+
+:root {
+  --bg: #0d0f14;
+  --bg2: #13161e;
+  --bg3: #1a1e28;
+  --border: rgba(255,255,255,0.07);
+  --border2: rgba(255,255,255,0.12);
+  --text: #f0f2f7;
+  --text2: #8b91a5;
+  --text3: #5a6075;
+  --accent: #4f8ef7;
+  --accent2: #7c5cfc;
+  --green: #34d48a;
+  --red: #f25a5a;
+  --amber: #f9a832;
+  --card: #161921;
+  --card2: #1e2230;
+  --radius: 14px;
+  --radius-sm: 8px;
+}
+
+[data-theme="light"] {
+  --bg: #f4f6fc;
+  --bg2: #ffffff;
+  --bg3: #e8ecf5;
+  --border: rgba(0,0,0,0.07);
+  --border2: rgba(0,0,0,0.13);
+  --text: #0d0f14;
+  --text2: #5a6075;
+  --text3: #9aa0b5;
+  --accent: #2563eb;
+  --accent2: #7c3aed;
+  --green: #16a34a;
+  --red: #dc2626;
+  --amber: #d97706;
+  --card: #ffffff;
+  --card2: #f0f3fb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* FinFlow Sidebar */
+.finflow-sidebar {
+  width: 280px;
+  min-height: 100vh;
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.finflow-sidebar-logo {
+  padding: 0 20px 28px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.finflow-logo-mark {
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.finflow-logo-mark svg {
+  width: 22px;
+  height: 22px;
+  color: #fff;
+}
+
+.finflow-logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.finflow-nav-section {
+  padding: 0 12px;
+  margin-bottom: 4px;
+}
+
+.finflow-nav-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0 8px;
+  margin-bottom: 8px;
+  margin-top: 20px;
+}
+
+.finflow-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--text2);
+  font-weight: 500;
+  transition: all 0.15s ease;
+  margin-bottom: 3px;
+  position: relative;
+  text-decoration: none;
+}
+
+.finflow-nav-item:hover {
+  background: var(--bg3);
+  color: var(--text);
+}
+
+.finflow-nav-item.active {
+  background: rgba(79,142,247,0.15);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.finflow-nav-item svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.finflow-nav-badge {
+  margin-left: auto;
+  background: var(--accent);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 20px;
+  min-width: 24px;
+  text-align: center;
+}
+
+.finflow-sidebar-bottom {
+  margin-top: auto;
+  padding: 0 12px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+/* FinFlow Main Content */
+.finflow-main {
+  margin-left: 280px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* FinFlow Topbar */
+.finflow-topbar {
+  padding: 16px 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg2);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.finflow-topbar-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  flex: 0 0 auto;
+}
+
+.finflow-topbar-search {
+  flex: 1;
+  max-width: 380px;
+  position: relative;
+}
+
+.finflow-topbar-search input {
+  width: 100%;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 9px 14px 9px 38px;
+  font-size: 14px;
+  color: var(--text);
+  font-family: inherit;
+  outline: none;
+  transition: border 0.15s;
+}
+
+.finflow-topbar-search input:focus {
+  border-color: var(--accent);
+}
+
+.finflow-topbar-search input::placeholder {
+  color: var(--text3);
+}
+
+.finflow-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.finflow-search-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.finflow-role-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.finflow-role-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+}
+
+.finflow-role-dot.admin {
+  background: var(--amber);
+}
+
+.finflow-theme-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--bg3);
+  border: 1px solid var(--border2);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text2);
+  transition: all 0.15s;
+}
+
+.finflow-theme-btn:hover {
+  color: var(--text);
+  background: var(--card2);
+}
+
+.finflow-theme-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* FinFlow Cards */
+.finflow-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.finflow-card-header {
+  padding: 18px 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.finflow-card-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.finflow-card-body {
+  padding: 18px 20px;
+}
+
+/* FinFlow Summary Cards */
+.finflow-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.finflow-summary-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.finflow-summary-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+.finflow-summary-card.balance::before {
+  background: var(--accent);
+}
+
+.finflow-summary-card.income::before {
+  background: var(--green);
+}
+
+.finflow-summary-card.expenses::before {
+  background: var(--red);
+}
+
+.finflow-summary-card.savings::before {
+  background: var(--accent2);
+}
+
+.finflow-summary-label {
+  font-size: 12px;
+  color: var(--text2);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.finflow-summary-label svg {
+  width: 16px;
+  height: 16px;
+}
+
+.finflow-summary-value {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1.2px;
+  margin-bottom: 8px;
+  font-family: 'DM Mono', monospace;
+}
+
+.finflow-summary-sub {
+  font-size: 12px;
+  color: var(--text3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.finflow-trend-up {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.finflow-trend-down {
+  color: var(--red);
+  font-weight: 600;
+}
+
+/* FinFlow Transactions Table */
+.finflow-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.finflow-table thead {
+  background: var(--bg3);
+}
+
+.finflow-table th {
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text3);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+}
+
+.finflow-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.finflow-table tbody tr:hover {
+  background: var(--bg3);
+  transition: background 0.12s;
+}
+
+.finflow-tx-cat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.finflow-tx-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.finflow-tx-name {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.finflow-tx-date {
+  font-size: 12px;
+  color: var(--text3);
+  margin-top: 3px;
+}
+
+.finflow-cat-pill {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: capitalize;
+}
+
+.finflow-cat-food { background: rgba(249,168,50,0.2); color: var(--amber); }
+.finflow-cat-transport { background: rgba(79,142,247,0.2); color: var(--accent); }
+.finflow-cat-shopping { background: rgba(124,92,252,0.2); color: var(--accent2); }
+.finflow-cat-health { background: rgba(52,212,138,0.2); color: var(--green); }
+.finflow-cat-entertainment { background: rgba(242,90,90,0.2); color: var(--red); }
+.finflow-cat-salary { background: rgba(52,212,138,0.25); color: var(--green); }
+.finflow-cat-utilities { background: rgba(139,145,165,0.2); color: var(--text2); }
+.finflow-cat-freelance { background: rgba(79,142,247,0.2); color: var(--accent); }
+
+.finflow-amount-income {
+  color: var(--green);
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+}
+
+.finflow-amount-expense {
+  color: var(--red);
+  font-weight: 700;
+  font-family: 'DM Mono', monospace;
+  font-size: 14px;
+}
+
+/* FinFlow Insights Grid */
+.finflow-insights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.finflow-insight-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+
+.finflow-insight-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.finflow-insight-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.finflow-insight-icon.blue { background: rgba(79,142,247,0.15); color: var(--accent); }
+.finflow-insight-icon.green { background: rgba(52,212,138,0.15); color: var(--green); }
+.finflow-insight-icon.red { background: rgba(242,90,90,0.15); color: var(--red); }
+.finflow-insight-icon.amber { background: rgba(249,168,50,0.15); color: var(--amber); }
+.finflow-insight-icon.purple { background: rgba(124,92,252,0.15); color: var(--accent2); }
+
+.finflow-insight-title {
+  font-size: 12px;
+  color: var(--text2);
+  margin-bottom: 6px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.finflow-insight-value {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  margin-bottom: 6px;
+}
+
+.finflow-insight-note {
+  font-size: 12px;
+  color: var(--text3);
+}
+
+/* Buttons */
+.finflow-btn {
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  border: none;
+}
+
+.finflow-btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.finflow-btn-primary:hover {
+  opacity: 0.9;
+}
+
+.finflow-btn-ghost {
+  background: var(--bg3);
+  color: var(--text);
+  border: 1px solid var(--border2);
+}
+
+.finflow-btn-ghost:hover {
+  background: var(--card2);
+}
+
+/* Page Container */
+.finflow-page {
+  padding: 28px;
+  display: none;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+.finflow-page.active {
+  display: flex;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mobile */
+@media (max-width: 900px) {
+  .finflow-sidebar {
+    transform: translateX(-100%);
+    box-shadow: 4px 0 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s;
+  }
+
+  .finflow-sidebar.open {
+    transform: translateX(0);
+  }
+
+  .finflow-main {
+    margin-left: 0;
+  }
+
+  .finflow-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 90;
+  }
+
+  .finflow-overlay.active {
+    display: block;
+  }
+
+  .finflow-summary-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .finflow-insights-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .finflow-topbar {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+
+  .finflow-topbar-search {
+    max-width: 100%;
+    flex-basis: 100%;
+    order: 3;
+  }
+
+  .finflow-page {
+    padding: 16px;
+  }
+
+  .finflow-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .finflow-insights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .finflow-table th:nth-child(3),
+  .finflow-table td:nth-child(3) {
+    display: none;
+  }
+
+  .finflow-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Charts Grid */
+.finflow-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 28px;
+}
+
+.finflow-card-body {
+  padding: 20px;
+  color: var(--text);
+}
+
+.finflow-card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.finflow-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.3px;
+}
+
+/* Transaction table styling */
+.finflow-tx-cat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.finflow-tx-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+.finflow-tx-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.finflow-tx-date {
+  font-size: 11px;
+  color: var(--text3);
+  margin-top: 4px;
+}
+
+.finflow-amount-income {
+  color: var(--green);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.finflow-amount-expense {
+  color: var(--red);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.finflow-page {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.finflow-page.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+/* Tablet responsive */
+@media (max-width: 900px) {
+  .finflow-charts-grid {
+    grid-template-columns: 1fr;
+  }
+}
