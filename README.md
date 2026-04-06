@@ -73,9 +73,9 @@ Or register a new account on the login page.
 
 ### Transactions Page
 #### Admin
-![Transactions](screenshots/transactions_admin.png)
+![Transactions](screenshots/transaction_admin.png)
 #### Viewer
-![Transactions](screenshots/transactions_viewer.png)
+![Transactions](screenshots/transaction_viewer.png)
 
 ### Insights Page
 ![Insights](screenshots/insights.png)
