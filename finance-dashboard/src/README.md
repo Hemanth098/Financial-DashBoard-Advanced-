@@ -63,6 +63,22 @@ Or register a new account on the login page.
 
 ---
 
+## Screenshots
+
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Dashboard Overview
+![Dashboard](screenshots/dashboard.png)
+
+### Transactions Page
+![Transactions](screenshots/transactions.png)
+
+### Insights Page
+![Insights](screenshots/insights.png)
+
+---
+
 ## Project Structure
 
 ```

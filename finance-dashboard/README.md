@@ -37,7 +37,21 @@ A modern, responsive financial dashboard built with React and Vite, designed to 
 - **Type-Safe**: Modern JavaScript with ESLint for code quality
 - **Modular Architecture**: Well-organized components and context management
 
-## 🚀 Tech Stack
+## � Screenshots
+
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Dashboard Overview
+![Dashboard](screenshots/dashboard.png)
+
+### Transactions Page
+![Transactions](screenshots/transactions.png)
+
+### Insights Page
+![Insights](screenshots/insights.png)
+
+## �🚀 Tech Stack
 
 - **Frontend**: React 19, Vite
 - **Styling**: CSS Variables, Custom Themes
